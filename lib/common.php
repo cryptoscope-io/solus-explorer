@@ -5,7 +5,7 @@
  * Released under the MIT License, see LICENSE in the repository root.
  */
     global $version;
-    $version="2.0.263";
+    $version="2.0.264";
     global $project_url;
     $project_url = "https://github.com/cryptoscope-io/solus-explorer";
     // URL folder of the admin area: public/admin-console/.

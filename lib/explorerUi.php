@@ -3578,18 +3578,19 @@ use WebSocket\Exception;
                                                                     $cache->distribution->q3->percent -
                                                                     $cache->distribution->q4->percent), 2, 2);
             
-            // convert amounts to splits with precision 2
-            $cache->distribution->q1->amount = splitFloat(@cmdec($cache->distribution->q1->amount), 2, 2);
-            $cache->distribution->q2->amount = splitFloat(@cmdec($cache->distribution->q2->amount), 2, 2);
-            $cache->distribution->q3->amount = splitFloat(@cmdec($cache->distribution->q3->amount), 2, 2);
-            $cache->distribution->q4->amount = splitFloat(@cmdec($cache->distribution->q4->amount), 2, 2);
-            $cache->distribution->other->amount = splitFloat(@cmdec($cache->distribution->other->amount), 2, 2);
-
             $cache->distribution->q1->percent = splitFloat(@cmdec($cache->distribution->q1->percent), 2, 2);
             $cache->distribution->q2->percent = splitFloat(@cmdec($cache->distribution->q2->percent), 2, 2);
             $cache->distribution->q3->percent = splitFloat(@cmdec($cache->distribution->q3->percent), 2, 2);
             $cache->distribution->q4->percent = splitFloat(@cmdec($cache->distribution->q4->percent), 2, 2);
             }
+
+            // convert amounts to splits with precision 2; also with nothing
+            // in circulation, the pages read whole/fraction from them
+            $cache->distribution->q1->amount = splitFloat(@cmdec($cache->distribution->q1->amount), 2, 2);
+            $cache->distribution->q2->amount = splitFloat(@cmdec($cache->distribution->q2->amount), 2, 2);
+            $cache->distribution->q3->amount = splitFloat(@cmdec($cache->distribution->q3->amount), 2, 2);
+            $cache->distribution->q4->amount = splitFloat(@cmdec($cache->distribution->q4->amount), 2, 2);
+            $cache->distribution->other->amount = splitFloat(@cmdec($cache->distribution->other->amount), 2, 2);
             // end calculate percents
             $ut->stopTimer("calculateTopAddressesDistribution");
         }
@@ -3723,8 +3724,8 @@ use WebSocket\Exception;
             $top_groups = db_getTopAddressGroupsByBalance(100,0,false,true);
             $ut->stopTimer("db_getTopAddressGroupsByBalance(100,0,f,t)",null);
 
-            $ut->createTimer("calculateTopAddressGroupssDistribution",1);
-            $cache->top_groupss = array();
+            $ut->createTimer("calculateTopAddressGroupsDistribution",1);
+            $cache->top_groups = array();
             $n = 0;
             $cache->distribution = new stdClass();
             $cache->distribution->q1 = new stdClass();
@@ -3792,19 +3793,20 @@ use WebSocket\Exception;
                                                                     $cache->distribution->q3->percent -
                                                                     $cache->distribution->q4->percent), 2, 2);
             
-            // convert amounts to splits with precision 2
-            $cache->distribution->q1->amount = splitFloat(@cmdec($cache->distribution->q1->amount), 2, 2);
-            $cache->distribution->q2->amount = splitFloat(@cmdec($cache->distribution->q2->amount), 2, 2);
-            $cache->distribution->q3->amount = splitFloat(@cmdec($cache->distribution->q3->amount), 2, 2);
-            $cache->distribution->q4->amount = splitFloat(@cmdec($cache->distribution->q4->amount), 2, 2);
-            $cache->distribution->other->amount = splitFloat(@cmdec($cache->distribution->other->amount), 2, 2);
-
             $cache->distribution->q1->percent = splitFloat(@cmdec($cache->distribution->q1->percent), 2, 2);
             $cache->distribution->q2->percent = splitFloat(@cmdec($cache->distribution->q2->percent), 2, 2);
             $cache->distribution->q3->percent = splitFloat(@cmdec($cache->distribution->q3->percent), 2, 2);
             $cache->distribution->q4->percent = splitFloat(@cmdec($cache->distribution->q4->percent), 2, 2);
             }
-            $ut->stopTimer("calculateTopAddressGroupssDistribution");
+
+            // convert amounts to splits with precision 2; also with nothing
+            // in circulation, the pages read whole/fraction from them
+            $cache->distribution->q1->amount = splitFloat(@cmdec($cache->distribution->q1->amount), 2, 2);
+            $cache->distribution->q2->amount = splitFloat(@cmdec($cache->distribution->q2->amount), 2, 2);
+            $cache->distribution->q3->amount = splitFloat(@cmdec($cache->distribution->q3->amount), 2, 2);
+            $cache->distribution->q4->amount = splitFloat(@cmdec($cache->distribution->q4->amount), 2, 2);
+            $cache->distribution->other->amount = splitFloat(@cmdec($cache->distribution->other->amount), 2, 2);
+            $ut->stopTimer("calculateTopAddressGroupsDistribution");
 
         }
         
